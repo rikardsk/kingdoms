@@ -1,0 +1,16 @@
+- [x] Initialize backend & frontend directories
+  - [x] Initialize `/backend` package and install dependencies
+  - [x] Initialize `/frontend` React + TypeScript application with Vite
+- [x] Develop Core Engine & Shared Types
+  - [x] Create shared game model typescript definitions
+  - [x] Implement core board game mechanics & scoring validation functions
+- [x] Develop AI Bot
+  - [x] Implement Easy and Hard bot heuristic selection logic
+- [x] Build Socket.io Server
+  - [x] Develop lobby management, state synchronizer, and player turn loop
+- [x] Build React UI
+  - [x] Design CSS variables, dark theme, and grid-based visuals
+  - [x] Implement Lobby Screen component
+  - [x] Implement interactive GameBoard Screen component
+- [x] Verification
+  - [x] Manually verify end-to-end local play and bot actions

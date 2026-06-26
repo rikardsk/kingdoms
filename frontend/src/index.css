@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-dark: #0f111a;
+  --bg-card: rgba(22, 28, 45, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --accent: #f59e0b;
+  
+  --color-resource: #10b981;
+  --color-hazard: #ef4444;
+  --color-dragon: #dc2626;
+  --color-goldmine: #eab308;
+  --color-wizard: #a855f7;
+  --color-mountain: #64748b;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-title: 'Outfit', sans-serif;
+  
+  --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at top left, #1e1b4b, var(--bg-dark) 60%);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism containers */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  box-shadow: var(--shadow-premium);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.6);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.9) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float-score {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.animate-pop {
+  animation: pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-title);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #818cf8);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Grid Board styles */
+.game-grid {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  aspect-ratio: 6 / 5;
+  max-width: 680px;
+}
+
+.grid-cell {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-cell:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.grid-cell.highlight-valid {
+  border: 1.5px dashed var(--primary);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.grid-cell.highlight-valid:hover {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: #818cf8;
+}
+
+/* Cards & Badges for Tiles */
+.tile-badge {
+  width: 90%;
+  height: 90%;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  font-size: 1.25rem;
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.2), 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.tile-resource {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  border: 1px solid #34d399;
+}
+
+.tile-hazard {
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  color: #fff;
+  border: 1px solid #f87171;
+}
+
+.tile-dragon {
+  background: linear-gradient(135deg, #7f1d1d, #b91c1c);
+  color: #fff;
+  border: 2px solid #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.tile-goldmine {
+  background: linear-gradient(135deg, #a16207, #eab308);
+  color: #1e1b4b;
+  border: 2px solid #fde047;
+  text-shadow: none;
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+}
+
+.tile-wizard {
+  background: linear-gradient(135deg, #6b21a8, #a855f7);
+  color: #fff;
+  border: 2px solid #c084fc;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.tile-mountain {
+  background: linear-gradient(135deg, #374151, #64748b);
+  color: #f1f5f9;
+  border: 1px solid #94a3b8;
+}
+
+/* Castles */
+.castle-badge {
+  width: 90%;
+  height: 90%;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.castle-towers {
+  display: flex;
+  gap: 2px;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.tower-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
