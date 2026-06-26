@@ -31,3 +31,8 @@ Thumbs.db
 
 # Model metadata & temporary files
 .gemini/
+
+# Project specific ignored files
+GitHub Prompt.md
+concept art/
+
